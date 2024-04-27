@@ -1,5 +1,33 @@
-$(document).on('mousemove', function (e) {
-    basket.css('left', e.pageX);
+// Selecting the basket element
+var basket = $('#basket');
+
+// Function to handle both mousemove and touchmove events
+function handleMove(e) {
+    // Prevent default behavior to avoid scrolling on touch devices
+    e.preventDefault();
+    
+    // Check if the event is a touch event
+    var isTouch = e.type === 'touchmove';
+
+    // Get the X coordinate of the event
+    var x = isTouch ? e.touches[0].clientX : e.pageX;
+
+    // Update the position of the basket
+    basket.css('left', x);
+}
+
+// Bind both mousemove and touchmove events to the document
+$(document).on('mousemove touchmove', handleMove);
+
+// Bind touchstart event to prevent default behavior
+$(document).on('touchstart', function(e) {
+    e.preventDefault();
+});
+
+// Bind touchend event to stop tracking touchmove when touch ends
+$(document).on('touchend', function() {
+    // Remove touchmove event handler when touch ends
+    $(document).off('touchmove', handleMove);
 });
 
 function egg_down(egg) {
