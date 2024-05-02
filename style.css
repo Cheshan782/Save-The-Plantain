@@ -139,3 +139,10 @@ body {
     display: none;
     cursor: pointer;
 }
+@media screen and (min-width: 480px) {
+    #score_help {
+        height: 8%;
+        font-size: 250%;
+    }
+    
+  }
